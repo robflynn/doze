@@ -45,11 +45,14 @@ gulp.task('serve', () => {
  */
  gulp.task('scripts', () => {
  	gulp.src(paths.src.javascript)
-        .pipe(webpack({output: { filename: 'patd.js'} }))
+        .pipe(webpack({output: { filename: 'doze.js'} }))
+        .on('error', util.log)        
  		.pipe(gulpif(production, uglify().on('error', util.log)))
-/*        .pipe(babel({
+        .on('error', util.log)        
+        .pipe(babel({
             presets: ['env']
-        }))*/
+        }))
+        .on('error', util.log)        
  	    .pipe(gulp.dest(paths.dist.javascript))
 		.pipe(browserSync.reload({stream: true}));
  })
