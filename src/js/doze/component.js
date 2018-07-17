@@ -38,6 +38,8 @@ class Component {
     componentWillRender() { console.log("component will render"); } 
     componentDidRender() { console.log("component did render"); } 
 
+    _propertyChanged(name) {}
+
     _classesChanged(event, className) {
 
         console.log(event, className);

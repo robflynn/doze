@@ -28,22 +28,21 @@ class Womble extends Doze.Component {
 const init_app = () => {
 	let app = new Doze.App();
 	let pane = new Doze.Pane();
-
+	// Maybe we should call this thing a window, and each app has to have
+	// some kind of window or screen on display
 	app.contentPane = pane;
 
-	let no1 = new Womble("AAA");
-	let no2 = new Womble("BBB");
-	let no3 = new Womble("CCC");
+	let button = new Doze.Button("Save");
 
-	pane.addChild(no1);
-	pane.addChild(no2);
-	pane.addChild(no3);
+	let buttonBar = new Doze.Pane();
+	buttonBar.layout = Doze.Layout.Horizontal;
+	buttonBar.addChild(button);
+
+	pane.addChild(buttonBar);
 
 	Doze.Render(app, $("#app"));
 
 	console.log(Doze);
-
-	pane.layout = Doze.Layout.Horizontal;
 }
 
 // Main entry point

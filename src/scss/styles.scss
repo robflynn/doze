@@ -44,16 +44,15 @@ html, body {
         padding: $padding;
         margin: $margin;
 
-        background: orange;
-
-        display: flex;
-        flex-direction: column;
+        border: solid 2px orange;
 
         &--vertical {
+            display: flex;            
             flex-direction: column;            
         }
 
         &--horizontal {
+            display: flex;            
             flex-direction: row;
         }
 

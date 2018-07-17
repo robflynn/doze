@@ -1,6 +1,7 @@
 const Layout = {
     Horizontal: "horizontal",
-    Vertical: "vertical"
+    Vertical: "vertical",
+    Default: "default"
 }
 
 export default Layout;

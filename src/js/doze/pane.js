@@ -7,7 +7,7 @@ class Pane extends Component {
 
         this.children = [];
 
-        this.layout = Layout.Vertical;
+        this.layout = Layout.Default;
 
         this.classes.add('doze--Container');
         this.classes.add('doze--Pane');
