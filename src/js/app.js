@@ -11,9 +11,12 @@ window['$'] = (query) => {
 }
 
 const init_app = () => {
-	let component = new Doze.Component();
+	let app = new Doze.App();
+	let pane = new Doze.Pane();
 
-	Doze.Render(component, $("#app"));
+	app.contentPane = pane;
+
+	Doze.Render(app, $("#app"));
 
 	console.log(Doze);
 }

@@ -3,13 +3,17 @@ function Render(component, targetElement) {
         throw new Error("Target must be an HTMLElement");
     }
 
-    if (!component instanceof Doze.Component) {
+    if (component instanceof Doze.Component === false) {
         throw new Error("component must be of type Doze.Component");
     }
 
-    targetElement.appendChild(component.render());
+    let renderedComponent = component.render();
 
-    console.log(component, targetElement);
+    component.componentWillRender();
+    targetElement.appendChild(renderedComponent);
+    component.componentDidRender();
+
+    return renderedComponent;
 }
 
 module.exports = {

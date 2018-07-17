@@ -1,9 +1,12 @@
+import { SetList } from './utils/utils.js';
+
 const uuid = require('uuid/v4');
 
 class Component {
     constructor() { 
         this.id = uuid();
         this.element = null;
+        this.classes = new SetList();
     }
 
     componentType() {
@@ -21,10 +24,31 @@ class Component {
         return `#${this.elementID()}`;
     }
 
+    htmlClasses() {
+        console.log("UHH");
+        console.log(this.classes);
+        return this.classes.items.join(' ');
+    }
+
+    ///////////////////////
+    // Events
+    ///////////////////////
+    componentWillRender() { console.log("component will render"); } 
+    componentDidRender() { console.log("component did render"); } 
+
     // Generate an HTMLElement that represents
     // our rendered component
     render() {
-        this.element = document.createElement("div");
+        let div = document.createElement("div");
+
+        div.setAttribute('id', this.elementID());
+        div.setAttribute('doze', this.componentType());
+
+        if (this.classes.count > 0) {
+            div.setAttribute('class', this.htmlClasses());
+        }
+
+        this.element = div;
 
         return this.element;
     }
