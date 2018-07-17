@@ -7,14 +7,36 @@ class Pane extends Component {
 
         this.children = [];
 
-        this._layout = Layout.Vertical;
+        this.layout = Layout.Vertical;
 
         this.classes.add('doze--Container');
         this.classes.add('doze--Pane');
     }
 
+    get layout() {
+        return this._layout;
+    }
+
+    set layout(newValue) {
+        this.classes.remove(`doze--Pane--${this._layout}`);
+
+        this._layout = newValue;
+
+        this.classes.add(`doze--Pane--${this._layout}`);        
+    }
+
+    render() {
+        this.element = super.render();
+
+        this.children.forEach(child => {
+            Doze.Render(child, this.element);
+        });
+
+        return this.element;
+    }
+
     addChild(child) {
-        if (component instanceof Component === false) {
+        if (child instanceof Component === false) {
             throw new Error("child must be of type Component");
         }
 
@@ -28,7 +50,7 @@ class Pane extends Component {
     }
 
     removeChild(child) {
-        if (component instanceof Component === false) {
+        if (child instanceof Component === false) {
             throw new Error("child must be of type Component");
         }
 

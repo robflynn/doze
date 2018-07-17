@@ -49,10 +49,10 @@ gulp.task('serve', () => {
         .on('error', util.log)        
  		.pipe(gulpif(production, uglify().on('error', util.log)))
         .on('error', util.log)        
-        .pipe(babel({
+/*        .pipe(babel({
             presets: ['env']
         }))
-        .on('error', util.log)
+        .on('error', util.log) */
  	    .pipe(gulp.dest(paths.dist.javascript))
 		.pipe(browserSync.reload({stream: true}));
  })

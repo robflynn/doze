@@ -1,4 +1,4 @@
-import { SetList } from './utils/utils.js';
+import { SetList, SetListEvent } from './utils/utils.js';
 
 const uuid = require('uuid/v4');
 
@@ -7,6 +7,8 @@ class Component {
         this.id = uuid();
         this.element = null;
         this.classes = new SetList();
+
+        this.classes.addListener((event, className) => { this._classesChanged(event, className) });
     }
 
     componentType() {
@@ -36,6 +38,31 @@ class Component {
     componentWillRender() { console.log("component will render"); } 
     componentDidRender() { console.log("component did render"); } 
 
+    _classesChanged(event, className) {
+
+        console.log(event, className);
+
+        if (!this.element) {
+            console.log("--> not yet rendered, skipping");
+
+            return;
+        }
+
+
+        switch (event) {
+            case SetListEvent.Added: 
+            {
+               this.element.classList.add(className);
+               break;
+            }
+            case SetListEvent.Removed: 
+            {
+                this.element.classList.remove(className);
+                break;
+            }
+        }
+    }    
+
     // Generate an HTMLElement that represents
     // our rendered component
     render() {
@@ -52,6 +79,8 @@ class Component {
 
         return this.element;
     }
+
+
 }
 
 export default Component;

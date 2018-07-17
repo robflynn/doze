@@ -1,3 +1,8 @@
+const SetListEvent = {
+    Added: "added",
+    Removed: "removed"
+}
+
 class SetList {
     constructor(items) {
         if (!arguments.length) {
@@ -8,7 +13,9 @@ class SetList {
             } else {
                 this._items = items.trim().split(' ');
             }
-        }        
+        }
+
+        this._listeners = [];
     }
 
     get count() {
@@ -32,20 +39,32 @@ class SetList {
     add(item) {
         if (!this.contains(item)) {
             this._items.push(item);
+
+            this.fireEvent(SetListEvent.Added, item);
+
+            return true;
         }
+
+        return false;
     }
 
     remove(item) {
         if (this.contains(item)) {
             this._items.splice(this._items.indexOf(item), 1);
+
+            this.fireEvent(SetListEvent.Removed, item);
+
+            return true;
         }
+
+        return false;
     }
 
     toggle(item) {
         if (this.contains(item)) {
-            this.remove(item);
+            return this.remove(item);
         } else {
-            this.add(item);
+            return this.add(item);
         }
     }
 
@@ -60,8 +79,31 @@ class SetList {
 
         return this._items[index];
     }
+
+   addListener(listener) {
+        this._listeners.push(listener);
+    }
+
+    removeListener(listener) {
+        let index = this._listeners.indexOf(listener);
+
+        if (index >= 0) {
+            this._listeners.splice(index, 1);
+        }
+    }
+
+    fireEvent(event, data) {
+        this._listeners.forEach(listener => {
+            if (listener) {
+                listener(event, data);
+            }
+        });
+    }
 }
 
+
+
 module.exports = {
-    SetList
+    SetList,
+    SetListEvent
 }

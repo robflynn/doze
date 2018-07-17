@@ -45,5 +45,17 @@ html, body {
         margin: $margin;
 
         background: orange;
+
+        display: flex;
+        flex-direction: column;
+
+        &--vertical {
+            flex-direction: column;            
+        }
+
+        &--horizontal {
+            flex-direction: row;
+        }
+
     }
 }
